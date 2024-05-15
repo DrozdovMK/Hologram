@@ -49,15 +49,12 @@ class UNet(nn.Module):
         down_8 = self.max_pool2d(down_7)
         down_9 = self.down_convolution_5(down_8)
         
-        up_1 = self.up_transpose_1(down_9)
+        up_1 = self.up_transpose_1(down_9)        
         x = self.up_convolution_1(torch.cat([down_7, up_1], 1))
-        
         up_2 = self.up_transpose_2(x)
         x = self.up_convolution_2(torch.cat([down_5, up_2], 1))
-        
         up_3 = self.up_transpose_3(x)
         x = self.up_convolution_3(torch.cat([down_3, up_3], 1))
-        
         up_4 = self.up_transpose_4(x)
         x = self.up_convolution_4(torch.cat([down_1, up_4], 1))
         
